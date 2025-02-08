@@ -39,7 +39,7 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies and Build
         run: | 
-          cd docs/Docusaurus/
+          cd docs/
           npm install
           npm run build
       - name: Upload artifact
