@@ -1,7 +1,7 @@
 name: show_error_handler
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://weincoder.github.io/show_error_handler/
 
 environment:
   sdk: ^3.6.1
