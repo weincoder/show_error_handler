@@ -1,6 +1,6 @@
 name: show_error_handler
 description: "A Flutter package that provides a convenient and customizable way to display errors to the user."
-version: 0.0.3
+version: 0.0.4
 homepage: https://weincoder.github.io/show_error_handler/
 
 environment:
