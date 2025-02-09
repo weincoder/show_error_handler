@@ -1,47 +1,179 @@
----
-sidebar_position: 1
----
+# Show Error Handler
 
-# Tutorial Intro
+A Flutter package that provides a convenient and customizable way to display errors to the user.
 
-Let's discover **Docusaurus in less than 5 minutes**.
+This package simplifies error handling by providing a centralized mechanism to present error messages, handling different error types gracefully, and offering flexibility in how errors are displayed. It allows developers to define custom error presenters and easily integrate them into their applications.
 
-## Getting Started
+## Features
 
-Get started by **creating a new site**.
+*   **Centralized Error Handling:** Manage and display errors from anywhere in your application through a single point.
+*   **Customizable Error Presentation:** Define how errors are shown to the user, whether through SnackBars, dialogs, or other UI elements. This package provides `WcAlert` for simple alerts and `WcModal` for more interactive error displays.
+*   **Error Type Handling:** Handle different types of errors (e.g., network errors, validation errors) with specific presentations using the `WcBaseError` class to structure your errors.
+*   **Easy Integration:** Simple to integrate into existing Flutter projects.
+*   **Extensible:** Allows for customization of the alert and modal widgets.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Getting started
 
-### What you'll need
+Add `show_error_handler` to your `pubspec.yaml` dependencies:
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+```yaml
+dependencies:
+  show_error_handler: ^latest_version  # Replace with the latest version
+```
+Then, run flutter pub get in your terminal.
 
-## Generate a new site
+## Usage
 
-Generate a new Docusaurus site using the **classic template**.
+### Defining Errors
+Use the WcBaseError class to create structured error objects:
 
-The classic template will automatically be added to your project after you run the command:
+```dart
+import 'package:show_error_handler/show_error_handler.dart';
 
-```bash
-npm init docusaurus@latest my-website classic
+final myError = WcBaseError(
+  message: 'An unexpected error occurred.',
+  title: 'Error',
+  code: '123',
+  type: 'network',
+  layer: 'data',
+);
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+### Showing Alerts
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+Display a simple alert using the showWcAlert function:
 
-## Start your site
+```dart
+import 'package:flutter/material.dart';
+import 'package:show_error_handler/show_error_handler.dart';
 
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+showWcAlert(context, myError);
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+You can customize the alert's appearance:
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+```dart
+showWcAlert(context, myError, backgroundColor: Colors.red, textColor: Colors.white);
+```
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+### Showing Modals
+
+Display a modal dialog with the error details and an optional action button using showWcModal:
+
+```dart
+showWcModal(context, myError, onPressed: () {
+  // Handle the action, e.g., retry the operation
+  print('Action button pressed!');
+});
+```
+Customize the modal:
+
+```dart
+showWcModal(
+  context,
+  myError,
+  backgroundColor: Colors.blue,
+  textColor: Colors.yellow,
+  icon: Icons.warning,
+  iconColor: Colors.white,
+  onPressed: () {
+    // ...
+  },
+);
+
+```
+
+## Example
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:show_error_handler/show_error_handler.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final wcBaseError = WcBaseError(
+    message: 'This is a message',
+    title: 'This is a title',
+  );
+  int _counter = 0;
+
+  void _showWcAlert() {
+    showWcAlert(context, wcBaseError);
+  }
+
+  void _showWcModal() {
+    showWcModal(context, wcBaseError, onPressed: () {
+      setState(() {
+        _counter--;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: _showWcAlert,
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            ),
+            const SizedBox(width: 10),
+            FloatingActionButton(
+              onPressed: _showWcModal,
+              tooltip: 'Second Button',
+              child: const Icon(Icons.remove),
+            ),
+          ],
+        ));
+  }
+}
+```

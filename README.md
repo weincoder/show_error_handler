@@ -1,33 +1,4 @@
-# show_error_handler
-
-A Flutter package that provides a convenient and customizable way to display errors to the user.
-
-This package simplifies error handling by providing a centralized mechanism to present error messages, handling different error types gracefully, and offering flexibility in how errors are displayed. It allows developers to define custom error presenters and easily integrate them into their applications.
-
-## Features
-
-*   **Centralized Error Handling:** Manage and display errors from anywhere in your application through a single point.
-*   **Customizable Error Presentation:** Define how errors are shown to the user, whether through SnackBars, dialogs, or other UI elements. This package provides `WcAlert` for simple alerts and `WcModal` for more interactive error displays.
-*   **Error Type Handling:** Handle different types of errors (e.g., network errors, validation errors) with specific presentations using the `WcBaseError` class to structure your errors.
-*   **Easy Integration:** Simple to integrate into existing Flutter projects.
-*   **Extensible:** Allows for customization of the alert and modal widgets.
-
-## Getting started
-
-Add `show_error_handler` to your `pubspec.yaml` dependencies:
-
-```yaml
-dependencies:
-  show_error_handler: ^latest_version 
-```
-
-## Usage
-
-Claro, aquí tienes el contenido del README en formato Markdown, combinando toda la información que te proporcioné en un único archivo:
-
-Markdown
-
-# show_error_handler
+# Show Error Handler
 
 A Flutter package that provides a convenient and customizable way to display errors to the user.
 
