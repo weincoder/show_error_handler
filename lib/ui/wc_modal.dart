@@ -43,6 +43,7 @@ class WcModal extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final VoidCallback? onPressed;
+  final String buttonText;
 
   const WcModal({
     super.key,
@@ -52,6 +53,7 @@ class WcModal extends StatelessWidget {
     this.icon = Icons.error_outline,
     this.iconColor = Colors.white,
     this.onPressed,
+    this.buttonText = 'Action',
   });
 
   @override
@@ -106,7 +108,7 @@ class WcModal extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20.0),
                       child: ElevatedButton(
                         onPressed: onPressed,
-                        child: Text('Action'),
+                        child: Text(buttonText),
                       ),
                     ),
                 ],
@@ -131,6 +133,7 @@ void showWcModal(
   double width = 200,
   Alignment alignment = Alignment.center,
   VoidCallback? onPressed,
+  String buttonText = 'Action',
 }) {
   final overlay = Overlay.of(context);
   late OverlayEntry overlayEntry;
@@ -157,6 +160,7 @@ void showWcModal(
                 overlayEntry.remove();
               }
             },
+            buttonText: buttonText,
           ),
         ),
       ),
