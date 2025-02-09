@@ -46,3 +46,28 @@ WcModal(
     },
 );
 ```
+
+## 0.0.4
+
+🆕 **New Feature: Customizable Button Text in WcModal**
+
+### Features:
+- **Custom Button Text**: Users can now define the title of the button in the WcModal widget optionally.
+
+### Example Usage:
+```dart
+WcModal(
+    error: WcBaseError(
+        title: 'Error Title',
+        message: 'Error message goes here.',
+    ),
+    backgroundColor: Colors.red,
+    textColor: Colors.white,
+    icon: Icons.error,
+    iconColor: Colors.white,
+    buttonText: 'Retry',
+    onPressed: () {
+        print('Action button pressed');
+    },
+);
+```
